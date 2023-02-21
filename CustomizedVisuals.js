@@ -71,32 +71,3 @@ looker.plugins.visualizations.add({
     doneRendering();
   }
 });
-
-
-// --------------------------------------------------------------------js FreeformAddition---------------------------------------------------
-
-looker.plugins.visualizations.add({
-  options: {
-    js_freeform: {
-      type: "string",
-      label: "Freeform JavaScript",
-      display: "text",
-      default: "console.log('Hello World')"
-    }
-  },
-  
-  create: function(element, config) {
-    element.innerHTML = "<div id='js-output'></div>";
-  },
-  
-  updateAsync: function(data, element, config, queryResponse, details, doneRendering) {
-    const jsCode = config.js_freeform;
-    try {
-      eval(jsCode);
-    } catch (error) {
-      document.getElementById("js-output").innerHTML = "Error executing JavaScript code: " + error.message;
-    }
-    
-    doneRendering();
-  }
-});
